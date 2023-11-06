@@ -1,0 +1,165 @@
+#include<iostream>
+using namespace std;
+
+//global variables
+//1) declare an empty inventory with a string array
+string inventory[10];
+
+//function delcarations
+void MonsterGen();
+
+
+
+void itemDropper();
+
+	int main() {
+		//initialize it with all empty spaces
+		for (int i = 0; i < 10; i++)
+			inventory[i] = " ";
+		cout << "Welcome to the shop!" << endl;
+
+		//local variables
+		char input = 'a';
+		int room = 1;
+
+		while (input != 'q') { //game loop!!!------------------}
+			//3) print out the inventory
+			cout << "your inventory:" << endl;
+			for (int i = 0; i < 10; i++)
+				cout << inventory[i] << " ";
+			cout << endl;
+
+			int room = 1;
+			char direction;
+			while (1) {
+				switch (room) {
+				case 1:
+					cout << "you're in room 1. You can go (e)ast. you see a shiny (k)ey on the ground." << endl;
+					cout << "you see a shiny key on the ground." << endl;
+					cin >> direction;
+					if (direction == 'e')
+						room = 2;
+					if (input == 'k')
+						cout << "you got a shiny key" << endl;
+					inventory[0] = "key";
+					break;
+				case 2:
+					//MonsterGen();
+					cout << "you're in room 2 which is the main room/living room, that has a bunch of a paintings on the walls. You can go (s)outh or (w)est." << endl;
+					cin >> direction;
+					if (direction == 's')
+						room = 3;
+					if (direction == 'w')
+						room = 1;
+					break;
+				case 3:
+					cout << "you're in room 3. you can go (n)orth or (s)outh." << endl;
+					cout << "there's a (t)reasure box in the corner!" << endl;
+					cin >> direction;
+					if (direction == 'n')
+						room = 2;
+					if (direction == 's')
+						room = 4;
+					if (direction == 't') //the player types 't' for this to run
+						itemDropper();
+					break;
+				case 4:
+					cout << "you're in room 4. You can go (n)orth or (e)ast." << endl;
+					cin >> direction;
+					if (direction == 'n')
+						room = 3;
+					if (direction == 'e')
+						room = 5;
+					break;
+				case 5:
+					cout << "you're in room 5. You can go (w)est or (s)outh." << endl;
+					cin >> direction;
+					if (direction == 'w')
+						room = 4;
+					if (direction == 's')
+						room = 6;
+					break;
+
+				case 6:
+					cout << "you're in room 6. You can go (n)orth or (e)ast" << endl;
+					cin >> direction;
+					if (direction == 'n')
+						room = 5;
+					if (direction == 'e')
+						room = 7;
+					break;
+
+
+
+				case 7:
+					cout << "you're in room 7. You can go (w)est or (s)outh" << endl;
+					cin >> direction;
+					if (direction == 'w')
+						room = 6;
+					if (direction == 's')
+						room = 8;
+					break;
+
+
+				case 8:
+					cout << "you're in room 8. You can go (n)orth or (e)ast" << endl;
+					cin >> direction;
+					if (direction == 'n')
+						room = 7;
+					if (direction == 'e')
+						room = 9;
+					break;
+
+				case 9:
+					cout << "you're in room 9. You can go (w)est or (s)outh" << endl;
+					cin >> direction;
+					if (direction == 'w')
+						room = 8;
+					if (direction == 's')
+						room = 10;
+					break;
+
+				case 10:
+					cout << "you're in room 10. You can go (n)orth" << endl;
+					cin >> direction;
+					if (direction == 'n')
+						if (inventory[0] == "key") {
+							room = 9;
+							cout << "you knock the door with the key!" << endl;
+							inventory[0] = " "; //get rid of the key
+						}
+						else
+							cout << "the door is locked!" << endl;
+					break;
+
+				}//end switch
+			}//end game loop
+		}//end main
+
+//function delcarations
+
+void MonsterGen(); {
+	//paste the code from tuesday here!
+	cout << "GRR IM A MONSTER" << endl;
+}
+
+void itemDropper(); {
+	int num = rand() % 100; //b/t 0-99
+	if (num < 25) {
+		cout << "you got a dirty sock!" << endl;
+		inventory[1] = "sock";
+	}
+	else if (num < 50) {
+		cout << "you got a handful of legos!" << endl;
+		inventory[2] = "legos";
+	
+	}
+	else if (num < 60) {
+		cout << "you got a CHICKEN" << endl;
+		inventory[3] = "chicken";
+	}
+	else {
+		cout << "you didnt get anything" << endl;
+	}
+
+}
